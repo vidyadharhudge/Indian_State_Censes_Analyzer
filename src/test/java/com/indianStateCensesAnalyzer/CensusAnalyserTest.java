@@ -8,6 +8,7 @@ public class CensusAnalyserTest
     private static final String INDIA_CENSUS_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCensusData.csv";
     private static final String WRONG_CSV_FILE_TYPE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.cs";
+    private static final String WRONG_DELIMITER_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusDataWithWrongDelimiter.csv";
     CensusAnalyser censusAnalyser;
 
     @Before
@@ -46,7 +47,6 @@ public class CensusAnalyserTest
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
-
     }
 
     /* T.C 1.3 :Given Indian State Censes Csv Type Is Incorrect Then Returns Custom Exception */
@@ -63,8 +63,23 @@ public class CensusAnalyserTest
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
-
     }
+
+    /* T.C 1.4 :Given State Censes Csv file Is Correct But With Wrong Delimiter Should Rhrow Custom Exception */
+    @Test
+    public void givenIndianCensusData_WhenWithWrongDelimiter_ThenShouldThrowException()
+    {
+        try
+        {
+            CensusAnalyser.readFile(WRONG_DELIMITER_FILE);
+        }
+        catch (CensusAnalyserException e)
+        {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,e.type);
+        }
+    }
+
+
 
 
 }

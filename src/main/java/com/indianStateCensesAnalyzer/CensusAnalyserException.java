@@ -4,7 +4,7 @@ public class CensusAnalyserException extends Exception
 {
     public enum ExceptionType
     {
-        FILE_NOT_FOUND;
+        FILE_NOT_FOUND,WRONG_DELIMITER;
     }
     public ExceptionType type;
     public CensusAnalyserException(ExceptionType type,String message)
