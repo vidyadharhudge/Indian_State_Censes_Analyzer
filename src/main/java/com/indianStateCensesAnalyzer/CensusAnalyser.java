@@ -32,11 +32,11 @@ public class CensusAnalyser
         }
         catch ( IOException e)
         {
-            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type");
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type For State Censes Data");
         }
         catch ( RuntimeException e)
         {
-            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,"Check Delimiter And Header");
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,"Check Delimiter And Header For State Censes Data");
         }
         return count;
     }
