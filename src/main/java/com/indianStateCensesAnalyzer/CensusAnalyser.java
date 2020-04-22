@@ -13,7 +13,7 @@ public class CensusAnalyser
     {
         System.out.println("Welcome To Indian State Censes Analyser");
     }
-    public Integer readFile(String filePath) throws CensusAnalyserException
+    public static Integer readFile(String filePath) throws CensusAnalyserException
     {
         int count=0;
         try
