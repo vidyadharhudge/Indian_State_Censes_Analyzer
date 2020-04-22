@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class CsvStates
 {
-    public Integer loadIndianStateCodes(String StateCodefilePath) throws CensusAnalyserException
+    public static int loadIndianStateCodes(String StateCodefilePath) throws CensusAnalyserException
     {
         int count=0;
         try

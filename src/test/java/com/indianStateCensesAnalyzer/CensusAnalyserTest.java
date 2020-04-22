@@ -1,5 +1,7 @@
 package com.indianStateCensesAnalyzer;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CensusAnalyserTest
@@ -9,8 +11,17 @@ public class CensusAnalyserTest
     private static final String WRONG_CSV_FILE_TYPE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.cs";
     private static final String WRONG_DELIMITER_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusDataWithWrongDelimiter.csv";
     private static final String STATE_CODE_CSV_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.csv";
-    CensusAnalyser censusAnalyser=new CensusAnalyser();
-    CsvStates csvStates=new CsvStates();
+    private static final String WRONG_CSV_FILE_PATHS="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCode.csv";
+    private //static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
+    private //static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
+    CensusAnalyser censusAnalyser;
+    CsvStates csvStates;
+    @Before
+    public void setup()
+    {
+        censusAnalyser=new CensusAnalyser();
+        csvStates=new CsvStates();
+    }
 
     /* Tc 1.1 :Given The State Census Csv File, Check To Ensure The Number Of Record Matches */
     @Test
@@ -102,6 +113,22 @@ public class CensusAnalyserTest
             e.printStackTrace();
         }
         // e.printStackTrace(); it is methode of java Throwable class
+    }
+
+    /* T.C 2.2 :Given State Code Csv File Is Incorrect Then Returns Custom Exception */
+    @Test
+    public void givenStateCodeData_WhenWithWrongFile_ThenShouldThrowException()
+    {
+        try
+        {
+            CsvStates.loadIndianStateCodes(WRONG_CSV_FILE_PATHS);
+        }
+        // Handling Exception "Enter Correct File And Type" ;
+        //e.type=FILE_NOT_FOUND;
+        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
+        }
     }
 
 }
