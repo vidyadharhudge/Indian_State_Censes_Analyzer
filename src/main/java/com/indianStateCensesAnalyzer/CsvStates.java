@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class CsvStates
 {
-    public Integer loadIndianStateCodes(String StateCodefilePath)
+    public Integer loadIndianStateCodes(String StateCodefilePath) throws CensusAnalyserException
     {
         int count=0;
         try
@@ -26,11 +26,10 @@ public class CsvStates
                 count++;
             }
         }
-        catch (IOException e)
+        catch ( IOException e)
         {
-            e.printStackTrace();
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type");
         }
-
         return count;
     }
 

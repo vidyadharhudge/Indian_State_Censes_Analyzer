@@ -1,6 +1,5 @@
 package com.indianStateCensesAnalyzer;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class CensusAnalyserTest
@@ -9,12 +8,10 @@ public class CensusAnalyserTest
     private static final String WRONG_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCensusData.csv";
     private static final String WRONG_CSV_FILE_TYPE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.cs";
     private static final String WRONG_DELIMITER_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusDataWithWrongDelimiter.csv";
-    CensusAnalyser censusAnalyser;
-    @Before
-    public void setup()
-    {
-        censusAnalyser=new CensusAnalyser();
-    }
+    private static final String STATE_CODE_CSV_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.csv";
+    CensusAnalyser censusAnalyser=new CensusAnalyser();
+    CsvStates csvStates=new CsvStates();
+
     /* Tc 1.1 :Given The State Census Csv File, Check To Ensure The Number Of Record Matches */
     @Test
     public void givenFilePath_WhenNoOfRecordMatches_ThenReturnTrue()
@@ -91,4 +88,23 @@ public class CensusAnalyserTest
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,e.type);
         }
     }
+    /* Tc 2.1 :Given The State code Csv File, Check To Ensure The Number Of Record Matches */
+    @Test
+    public void givenFilePathOfStateCode_WhenNoOfRecordMatches_ThenReturnTrue()
+    {
+        try
+        {
+            int counts=csvStates.loadIndianStateCodes(STATE_CODE_CSV_FILE);
+            Assert.assertEquals(37,counts);
+        }
+        catch (CensusAnalyserException e)
+        {
+            e.printStackTrace();
+        }
+        // e.printStackTrace(); it is methode of java Throwable class
+    }
+
 }
+
+
+

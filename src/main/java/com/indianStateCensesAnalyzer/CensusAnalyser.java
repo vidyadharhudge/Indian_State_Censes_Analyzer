@@ -19,7 +19,6 @@ public class CensusAnalyser
         try
         {
             BufferedReader reader= Files.newBufferedReader(Paths.get(filePath));
-
             CsvToBean<IndianStateCensesAnalyzer> csvToBean= new CsvToBeanBuilder(reader)
                     .withType(IndianStateCensesAnalyzer.class)
                     .withIgnoreLeadingWhiteSpace(true)
