@@ -25,6 +25,7 @@ public class CensusAnalyserTest
             Assert.assertEquals(29,noOfRecords);
 
         }
+        // e.printStackTrace(); it is methode of java Throwable class
         catch (CensusAnalyserException e)
         {
             e.printStackTrace();
@@ -90,8 +91,4 @@ public class CensusAnalyserTest
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,e.type);
         }
     }
-
-
-
-
 }
