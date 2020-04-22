@@ -7,6 +7,7 @@ public class CensusAnalyserTest
 {
     private static final String INDIA_CENSUS_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCensusData.csv";
+    private static final String WRONG_CSV_FILE_TYPE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.cs";
     CensusAnalyser censusAnalyser;
 
     @Before
@@ -33,7 +34,7 @@ public class CensusAnalyserTest
 
     /* T.C 1.2 :Given Indian State Censes Csv File Is Incorrect Then Returns Custom Exception */
     @Test
-    public void givenIndianCensusData_WithWongFile_ShouldThrowException()
+    public void givenIndianCensusData_WhenWithWrongFile_ThenShouldThrowException()
     {
         try
         {
@@ -47,5 +48,23 @@ public class CensusAnalyserTest
         }
 
     }
+
+    /* T.C 1.3 :Given Indian State Censes Csv Type Is Incorrect Then Returns Custom Exception */
+    @Test
+    public void givenIndianCensusData_WhenWithWrongType_ThenShouldThrowException()
+    {
+        try
+        {
+            CensusAnalyser.readFile(WRONG_CSV_FILE_TYPE);
+        }
+        // Handling Exception "Enter Correct File And Type" ;
+        //e.type=FILE_NOT_FOUND;
+        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
+        }
+
+    }
+
 
 }
