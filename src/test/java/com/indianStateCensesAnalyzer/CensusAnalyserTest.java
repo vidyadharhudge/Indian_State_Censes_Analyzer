@@ -13,7 +13,7 @@ public class CensusAnalyserTest
     private static final String STATE_CODE_CSV_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.csv";
     private static final String WRONG_CSV_FILE_PATHS="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCode.csv";
     private static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
-   // private static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
+    private static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
     CensusAnalyser censusAnalyser;
     CsvStates csvStates;
     @Before
@@ -114,7 +114,6 @@ public class CensusAnalyserTest
         }
         // e.printStackTrace(); it is methode of java Throwable class
     }
-
     /* T.C 2.2 :Given State Code Csv File Is Incorrect Then Returns Custom Exception */
     @Test
     public void givenStateCodeData_WhenWithWrongFile_ThenShouldThrowException()
@@ -130,7 +129,6 @@ public class CensusAnalyserTest
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
     }
-
     /* T.C 2.3 :Given State Code Csv Type Is Incorrect Then Returns Custom Exception */
     @Test
     public void givenStateCodeData_WhenWithWrongType_ThenShouldThrowException()
@@ -144,6 +142,21 @@ public class CensusAnalyserTest
         catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
+        }
+    }
+    /* T.C 2.4 :Given State Code Csv file Is Correct But With Wrong Delimiter Should Rhrow Custom Exception */
+    @Test
+    public void givenStateCodeData_WhenWithWrongDelimiter_ThenShouldThrowException()
+    {
+        try
+        {
+            CsvStates.loadIndianStateCodes(WRONG_DELIMITER_FILES);
+        }
+        // Handling Exception "Check Delimiter And Header" ;
+        //e.type=WRONG_DELIMITER;
+        catch (CensusAnalyserException e)
+        {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,e.type);
         }
     }
 
