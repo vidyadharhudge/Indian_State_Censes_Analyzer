@@ -12,8 +12,8 @@ public class CensusAnalyserTest
     private static final String WRONG_DELIMITER_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusDataWithWrongDelimiter.csv";
     private static final String STATE_CODE_CSV_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.csv";
     private static final String WRONG_CSV_FILE_PATHS="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCode.csv";
-    private //static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
-    private //static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
+    private static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
+   // private static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
     CensusAnalyser censusAnalyser;
     CsvStates csvStates;
     @Before
@@ -122,6 +122,22 @@ public class CensusAnalyserTest
         try
         {
             CsvStates.loadIndianStateCodes(WRONG_CSV_FILE_PATHS);
+        }
+        // Handling Exception "Enter Correct File And Type" ;
+        //e.type=FILE_NOT_FOUND;
+        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
+        }
+    }
+
+    /* T.C 2.3 :Given State Code Csv Type Is Incorrect Then Returns Custom Exception */
+    @Test
+    public void givenStateCodeData_WhenWithWrongType_ThenShouldThrowException()
+    {
+        try
+        {
+            CsvStates.loadIndianStateCodes(WRONG_CSV_FILE_TYPES);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
