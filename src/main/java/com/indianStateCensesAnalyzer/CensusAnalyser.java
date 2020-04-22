@@ -13,7 +13,7 @@ public class CensusAnalyser
     {
         System.out.println("Welcome To Indian State Censes Analyser");
     }
-    public Integer readFile(String filePath)
+    public Integer readFile(String filePath) throws CensusAnalyserException
     {
         int count=0;
         try
@@ -30,8 +30,10 @@ public class CensusAnalyser
                 IndianStateCensesAnalyzer indianStateCensesAnalyzer=stateCensesAnalyzerClassIterator.next();
                 count++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch ( IOException e)
+        {
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type");
         }
 
         return count;
