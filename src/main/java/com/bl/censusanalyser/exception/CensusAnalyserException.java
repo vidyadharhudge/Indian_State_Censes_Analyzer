@@ -1,17 +1,16 @@
-package com.indianStateCensesAnalyzer;
+package com.bl.censusanalyser.exception;
 
-public class CensusAnalyserException extends Exception
+public class CensusAnalyserException extends RuntimeException
 {
     public enum ExceptionType
     {
         FILE_NOT_FOUND,WRONG_DELIMITER;
     }
     public ExceptionType type;
-    public CensusAnalyserException(ExceptionType type,String message)
+    public CensusAnalyserException(ExceptionType type, String message)
     {
         super(message);
         this.type=type;
         System.out.println(message);
     }
-
 }

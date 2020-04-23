@@ -1,6 +1,11 @@
-package com.indianStateCensesAnalyzer;
+package com.bl.censusanalyser;
+
+import com.bl.censusanalyser.exception.CensusAnalyserException;
+import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
+import com.bl.censusanalyser.model.IndianStateCode;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,17 +15,15 @@ import java.util.stream.StreamSupport;
 
 public class CensusAnalyser
 {
-
     // welcome message
     public static void main(String[] args)
     {
         System.out.println("Welcome To Indian State Censes Analyser");
     }
-
     ///Read State Census Data CSV file
     //Iterable is interface allow object to make use of for each loop it does internally by calling iterator methode object
     //spliterator() It helps in processing the collection data in parallel
-    public Integer readFile(String filePath) throws CensusAnalyserException
+    public Integer readFile(String filePath)
     {
         int noOfRecords = 0;
         try
@@ -42,7 +45,7 @@ public class CensusAnalyser
     }
 
     // Read State Code Data CSV file
-    public int loadIndianStateCodes(String StateCodefilePath) throws CensusAnalyserException
+    public int loadIndianStateCodes(String StateCodefilePath)
     {
         int countRecords = 0;
         try
@@ -62,7 +65,6 @@ public class CensusAnalyser
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Code Data");
         }
     }
-
     // Open Csv Code
     private <E> Iterator<E> getCSVfile(BufferedReader reader, Class<E> csvClass)
     {

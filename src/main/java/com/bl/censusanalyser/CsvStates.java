@@ -1,6 +1,10 @@
-package com.indianStateCensesAnalyzer;
+package com.bl.censusanalyser;
+
+import com.indianStateCensesAnalyzer.CensusAnalyserException;
+import com.indianStateCensesAnalyzer.IndianStateCode;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +23,7 @@ public class CsvStates
                     .withType(IndianStateCode.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            Iterator<IndianStateCode>indianStateCodeIterator=csvToBean.iterator();
+            Iterator<IndianStateCode> indianStateCodeIterator=csvToBean.iterator();
             while (indianStateCodeIterator.hasNext())
             {
                 IndianStateCode indianStateCode=indianStateCodeIterator.next();

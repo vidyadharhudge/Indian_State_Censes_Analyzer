@@ -1,18 +1,12 @@
 package com.indianStateCensesAnalyzer;
+import com.bl.censusanalyser.CensusAnalyser;
+import com.bl.censusanalyser.exception.CensusAnalyserException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest
 {
-    private static final String INDIA_CENSUS_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.csv";
-    private static final String WRONG_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCensusData.csv";
-    private static final String WRONG_CSV_FILE_TYPE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.cs";
-    private static final String WRONG_DELIMITER_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusDataWithWrongDelimiter.csv";
-    private static final String STATE_CODE_CSV_FILE="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.csv";
-    private static final String WRONG_CSV_FILE_PATHS="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCode.csv";
-    private static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
-    private static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
-
     CensusAnalyser censusAnalyser;
     @Before
     public void setup()
@@ -26,6 +20,7 @@ public class CensusAnalyserTest
     {
         try
         {
+
             int noOfRecords=censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29,noOfRecords);
 

@@ -1,4 +1,4 @@
-package com.indianStateCensesAnalyzer;
+package com.bl.censusanalyser.model;
 
 import com.opencsv.bean.CsvBindByName;
 
