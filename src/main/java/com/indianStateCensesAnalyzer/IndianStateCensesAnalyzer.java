@@ -16,7 +16,6 @@ public class IndianStateCensesAnalyzer
     @CsvBindByName (column = "DensityPerSqKm")
     public String density;
 
-
     @Override
     public String toString() {
         return "IndianStateCensesAnalyzer{" +

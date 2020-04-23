@@ -1,9 +1,7 @@
 package com.indianStateCensesAnalyzer;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 public class CensusAnalyserTest
 {
     private static final String INDIA_CENSUS_CSV_FILE_PATH="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCensusData.csv";
@@ -16,12 +14,10 @@ public class CensusAnalyserTest
     private static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
 
     CensusAnalyser censusAnalyser;
-    CsvStates csvStates;
     @Before
     public void setup()
     {
         censusAnalyser=new CensusAnalyser();
-        csvStates=new CsvStates();
     }
 
     /* Tc 1.1 :Given The State Census Csv File, Check To Ensure The Number Of Record Matches */
@@ -46,11 +42,11 @@ public class CensusAnalyserTest
     {
         try
         {
-            CensusAnalyser.readFile(WRONG_CSV_FILE_PATH);
+            censusAnalyser.readFile(WRONG_CSV_FILE_PATH);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
-        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        catch (CensusAnalyserException e)
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
@@ -61,7 +57,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CensusAnalyser.readFile(WRONG_CSV_FILE_TYPE);
+            censusAnalyser.readFile(WRONG_CSV_FILE_TYPE);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
@@ -76,7 +72,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CensusAnalyser.readFile(WRONG_DELIMITER_FILE);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILE);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -91,7 +87,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CensusAnalyser.readFile(WRONG_DELIMITER_FILE);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILE);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -106,7 +102,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            int counts=csvStates.loadIndianStateCodes(STATE_CODE_CSV_FILE);
+            int counts=censusAnalyser.loadIndianStateCodes(STATE_CODE_CSV_FILE);
             Assert.assertEquals(37,counts);
         }
         catch (CensusAnalyserException e)
@@ -121,7 +117,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CsvStates.loadIndianStateCodes(WRONG_CSV_FILE_PATHS);
+            censusAnalyser.loadIndianStateCodes(WRONG_CSV_FILE_PATHS);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
@@ -136,7 +132,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CsvStates.loadIndianStateCodes(WRONG_CSV_FILE_TYPES);
+            censusAnalyser.loadIndianStateCodes(WRONG_CSV_FILE_TYPES);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
@@ -152,7 +148,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CsvStates.loadIndianStateCodes(WRONG_DELIMITER_FILES);
+            censusAnalyser.loadIndianStateCodes(WRONG_DELIMITER_FILES);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -167,7 +163,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            CsvStates.loadIndianStateCodes(WRONG_DELIMITER_FILES);
+            censusAnalyser.loadIndianStateCodes(WRONG_DELIMITER_FILES);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -176,8 +172,6 @@ public class CensusAnalyserTest
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,e.type);
         }
     }
-
-
 }
 
 
