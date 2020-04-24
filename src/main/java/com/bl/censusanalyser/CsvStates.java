@@ -1,7 +1,7 @@
 package com.bl.censusanalyser;
 
-import com.indianStateCensesAnalyzer.CensusAnalyserException;
-import com.indianStateCensesAnalyzer.IndianStateCode;
+import com.bl.censusanalyser.exception.CensusAnalyserException;
+import com.bl.censusanalyser.model.IndianStateCode;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
+
+//import com.indianStateCensesAnalyzer.IndianStateCode;
 
 public class CsvStates
 {

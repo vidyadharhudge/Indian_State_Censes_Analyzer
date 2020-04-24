@@ -1,9 +1,12 @@
 package com.indianStateCensesAnalyzer;
 import com.bl.censusanalyser.CensusAnalyser;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
+import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
+import com.bl.censusanalyser.model.IndianStateCode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest
 {
@@ -20,10 +23,8 @@ public class CensusAnalyserTest
     {
         try
         {
-
-            int noOfRecords=censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH);
+            int noOfRecords=censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH,IndianStateCensesAnalyzer.class);
             Assert.assertEquals(29,noOfRecords);
-
         }
         // e.printStackTrace(); it is methode of java Throwable class
         catch (CensusAnalyserException e)
@@ -37,7 +38,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.readFile(WRONG_CSV_FILE_PATH);
+            censusAnalyser.readFile(WRONG_CSV_FILE_PATH,IndianStateCensesAnalyzer.class);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
@@ -52,7 +53,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.readFile(WRONG_CSV_FILE_TYPE);
+            censusAnalyser.readFile(WRONG_CSV_FILE_TYPE,IndianStateCensesAnalyzer.class);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
@@ -67,7 +68,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.readFile(WRONG_DELIMITER_FILE);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILE,IndianStateCensesAnalyzer.class);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -82,7 +83,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.readFile(WRONG_DELIMITER_FILE);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILE,IndianStateCensesAnalyzer.class);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -97,14 +98,13 @@ public class CensusAnalyserTest
     {
         try
         {
-            int counts=censusAnalyser.loadIndianStateCodes(STATE_CODE_CSV_FILE);
-            Assert.assertEquals(37,counts);
+            int noOfRecords=censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCode.class);
+            Assert.assertEquals(37,noOfRecords);
         }
         catch (CensusAnalyserException e)
         {
             e.printStackTrace();
         }
-        // e.printStackTrace(); it is methode of java Throwable class
     }
     /* T.C 2.2 :Given State Code Csv File Is Incorrect Then Returns Custom Exception */
     @Test
@@ -112,11 +112,11 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.loadIndianStateCodes(WRONG_CSV_FILE_PATHS);
+            censusAnalyser.readFile(WRONG_CSV_FILE_PATHS,IndianStateCode.class);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
-        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        catch (CensusAnalyserException e)
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
@@ -127,11 +127,11 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.loadIndianStateCodes(WRONG_CSV_FILE_TYPES);
+            censusAnalyser.readFile(WRONG_CSV_FILE_TYPES,IndianStateCode.class);
         }
         // Handling Exception "Enter Correct File And Type" ;
         //e.type=FILE_NOT_FOUND;
-        catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        catch (CensusAnalyserException e)
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,e.type);
         }
@@ -143,7 +143,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.loadIndianStateCodes(WRONG_DELIMITER_FILES);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILES,IndianStateCode.class);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
@@ -158,7 +158,7 @@ public class CensusAnalyserTest
     {
         try
         {
-            censusAnalyser.loadIndianStateCodes(WRONG_DELIMITER_FILES);
+            censusAnalyser.readFile(WRONG_DELIMITER_FILES,IndianStateCode.class);
         }
         // Handling Exception "Check Delimiter And Header" ;
         //e.type=WRONG_DELIMITER;
