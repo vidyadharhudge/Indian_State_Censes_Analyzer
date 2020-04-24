@@ -6,7 +6,6 @@ import com.bl.censusanalyser.model.IndianStateCode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest
 {
