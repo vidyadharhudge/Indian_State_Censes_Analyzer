@@ -55,7 +55,6 @@ public class IndianStateCode
     {
         this.stateCode = stateCode;
     }
-
     @Override
     public String toString()
     {
@@ -66,7 +65,4 @@ public class IndianStateCode
                 ", stateCode='" + stateCode + '\'' +
                 '}';
     }
-
-
-
 }

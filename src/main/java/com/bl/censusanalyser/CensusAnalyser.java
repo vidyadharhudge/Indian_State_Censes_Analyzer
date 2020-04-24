@@ -1,5 +1,6 @@
 package com.bl.censusanalyser;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,14 +21,14 @@ public class CensusAnalyser<E>
     //spliterator() It helps in processing the collection data in parallel
     public int readFile(String filePath, Object E)
     {
-        int noOfRecords = 0;
+        //int noOfRecords = 0;
         try
         {
             BufferedReader reader = Files.newBufferedReader(Paths.get(filePath));
-            Iterator<E> stateCensesAnalyzerIterator = (Iterator<E>)OpenCsv.getCSVfile(reader, E.getClass());
-            Iterable<E>csviterable=()-> stateCensesAnalyzerIterator;
-            noOfRecords=(int) StreamSupport.stream(csviterable.spliterator(),false).count();
-            return noOfRecords;
+            //Iterator<E> stateCensesAnalyzerIterator = (Iterator<E>) OpenCsv.getCSVfile(reader, E.getClass());
+            ICSVBuilder icsvBuilder=CSVBuilderFactory.createCSVBuilder();
+            Iterator<E>censusCSViterator=icsvBuilder.getCSVfile(reader,E.getClass());
+            return this.getCount(censusCSViterator);
         }
         catch (IOException e)
         {
@@ -37,7 +38,11 @@ public class CensusAnalyser<E>
         {
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Censes Data");
         }
-
     }
-
+    private <E> int getCount(Iterator<E> iterator)
+    {
+        Iterable<E> csviterable=()->iterator;
+        int numberOfEntries=(int)StreamSupport.stream(csviterable.spliterator(),false).count();
+        return numberOfEntries;
+    }
 }
