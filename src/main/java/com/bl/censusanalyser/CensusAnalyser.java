@@ -1,12 +1,11 @@
 package com.bl.censusanalyser;
-
 import com.bl.censusanalyser.exception.CensusAnalyserException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser<E>
@@ -26,10 +25,9 @@ public class CensusAnalyser<E>
         try
         {
             BufferedReader reader = Files.newBufferedReader(Paths.get(filePath));
-            //Iterator<E> stateCensesAnalyzerIterator = (Iterator<E>) OpenCsv.getCSVfile(reader, E.getClass());
             ICSVBuilder icsvBuilder=CSVBuilderFactory.createCSVBuilder();
-            Iterator<E>censusCSViterator=icsvBuilder.getCSVfile(reader,E.getClass());
-            return this.getCount(censusCSViterator);
+            List<E> censusCSVlist=icsvBuilder.getCSVFileList(reader,E.getClass());
+            return censusCSVlist.size();
         }
         catch (IOException e)
         {
