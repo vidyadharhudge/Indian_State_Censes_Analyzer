@@ -25,10 +25,9 @@ public class CensusAnalyserTest
             int noOfRecords=censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH,IndianStateCensesAnalyzer.class);
             Assert.assertEquals(29,noOfRecords);
         }
-        // e.printStackTrace(); it is methode of java Throwable class
         catch (CensusAnalyserException e)
         {
-            e.printStackTrace();
+
         }
     }
     /* T.C 1.2 :Given State Censes Csv File Is Incorrect Then Returns Custom Exception */
@@ -102,7 +101,7 @@ public class CensusAnalyserTest
         }
         catch (CensusAnalyserException e)
         {
-            e.printStackTrace();
+
         }
     }
     /* T.C 2.2 :Given State Code Csv File Is Incorrect Then Returns Custom Exception */
