@@ -1,5 +1,4 @@
 package com.indianStateCensesAnalyzer;
-
 import com.bl.censusanalyser.CensusAnalyser;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
@@ -14,7 +13,8 @@ public class CensusAnalyserTest {
     CensusAnalyser censusAnalyser;
 
     @Before
-    public void setup() {
+    public void setup()
+    {
         censusAnalyser = new CensusAnalyser();
     }
 
@@ -146,15 +146,34 @@ public class CensusAnalyserTest {
         }
     }
 
-    /* T.C 3.1 :Indian Sorted Data In Sorted Form  */
+    /* T.C 3.1 :Indian Census Data In Sorted Form  */
     @Test
-    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState() {
-        try {
+    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState()
+    {
+        try
+        {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             String sortedData = censusAnalyser.getStateWiseSortedData(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
             Assert.assertEquals("Andhra Pradesh", indianStateCensesAnalyzers[0].getState());
             Assert.assertEquals("West Bengal", indianStateCensesAnalyzers[28].getState());
+        }
+        catch (CensusAnalyserException e)
+        {
+            e.printStackTrace();
+
+        }
+    }
+    /* T.C 4.1 :Indian Code In Sorted Form  */
+    @Test
+    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState() {
+        try
+        {
+            censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCode.class);
+            String sortedData = censusAnalyser.getStateWiseSortedData(IndianStateCode.class);
+            IndianStateCode[] indianStateCodes = new Gson().fromJson(sortedData, IndianStateCode[].class);
+            Assert.assertEquals("AD", indianStateCodes[0].getStateCode());
+            Assert.assertEquals("WB", indianStateCodes[28].getStateCode());
         }
         catch (CensusAnalyserException e)
         {

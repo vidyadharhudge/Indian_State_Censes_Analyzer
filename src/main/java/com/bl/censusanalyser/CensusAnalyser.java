@@ -59,14 +59,14 @@ public class CensusAnalyser<E>
         {
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA,"No Data Is Prsent");
         }
-        Comparator<E>indianStateCensesAnalyzerComparator=Comparator.comparing(IndianStateCensesAnalyzer->IndianStateCensesAnalyzer.toString());
-        this.sort(indianStateCensesAnalyzerComparator);
+        Comparator<E>indianStateCodeComparator=Comparator.comparing(IndianStateCode->IndianStateCode.toString());
+        this.sort(indianStateCodeComparator);
         String sortedCensusJson=new Gson().toJson(censusCSVlist);
         return sortedCensusJson;
     }
 
     //Function To Sorted States
-    public void sort(Comparator<E>indianStateCensesAnalyzerComparator)
+    public void sort(Comparator<E>indianStateCodeComparator)
     {
         for (int i = 0; i<censusCSVlist.size()-1; i++)
         {
@@ -74,7 +74,7 @@ public class CensusAnalyser<E>
             {
                 E censesAnalyzer1=censusCSVlist.get(j);
                 E censesAnalyzer2=censusCSVlist.get(j+1);
-                if(indianStateCensesAnalyzerComparator.compare(censesAnalyzer1,censesAnalyzer2)>0)
+                if(indianStateCodeComparator.compare(censesAnalyzer1,censesAnalyzer2)>0)
                 {
                     censusCSVlist.set(j,censesAnalyzer2);
                     censusCSVlist.set(j+1,censesAnalyzer1);
