@@ -26,10 +26,6 @@ public class CensusAnalyser<E>
         censusMap=new HashMap<>();
 
     }
-
-    ///Read State Census Data CSV file
-    //Iterable is interface allow object to make use of for each loop it does internally by calling iterator methode object
-    //spliterator() It helps in processing the collection data in parallel
     public int readFile(String filePath, Object E)
     {
         try
