@@ -1,8 +1,6 @@
 package com.bl.censusanalyser;
-
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,13 +13,11 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser<E>
 {
     List<E>censusCSVlist=null;
-
     // welcome message
     public static void main(String[] args)
     {
         System.out.println("Welcome To Indian State Censes Analyser");
     }
-
     ///Read State Census Data CSV file
     //Iterable is interface allow object to make use of for each loop it does internally by calling iterator methode object
     //spliterator() It helps in processing the collection data in parallel
@@ -31,7 +27,7 @@ public class CensusAnalyser<E>
         {
             BufferedReader reader = Files.newBufferedReader(Paths.get(filePath));
             ICSVBuilder icsvBuilder=CSVBuilderFactory.createCSVBuilder();
-            censusCSVlist=icsvBuilder.getCSVFileList(reader,E.getClass());
+            List<E>censusCSVlist=icsvBuilder.getCSVFileList(reader,E.getClass());
             return censusCSVlist.size();
         }
         catch (IOException e)
@@ -42,7 +38,6 @@ public class CensusAnalyser<E>
         {
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Censes Data");
         }
-
     }
     // no of entries in Csv File
     private <E> int getCount(Iterator<E> iterator)
@@ -59,6 +54,19 @@ public class CensusAnalyser<E>
         {
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA,"No Data Is Prsent");
         }
+        Comparator<E>indianStateCensesAnalyzerComparator=Comparator.comparing(IndianStateCensesAnalyzer->IndianStateCensesAnalyzer.toString());
+        this.sort(indianStateCensesAnalyzerComparator);
+        String sortedCensusJson=new Gson().toJson(censusCSVlist);
+        return sortedCensusJson;
+    }
+
+    //Getting Data Of State
+    public String getStateWiseSortedCode(Object E)
+    {
+        if (censusCSVlist.size()==0 || censusCSVlist==null)
+        {
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA,"No Data Is Prsent");
+        }
         Comparator<E>indianStateCodeComparator=Comparator.comparing(IndianStateCode->IndianStateCode.toString());
         this.sort(indianStateCodeComparator);
         String sortedCensusJson=new Gson().toJson(censusCSVlist);
@@ -66,7 +74,7 @@ public class CensusAnalyser<E>
     }
 
     //Function To Sorted States
-    public void sort(Comparator<E>indianStateCodeComparator)
+    public void sort(Comparator<E>indianStatComparator)
     {
         for (int i = 0; i<censusCSVlist.size()-1; i++)
         {
@@ -74,7 +82,7 @@ public class CensusAnalyser<E>
             {
                 E censesAnalyzer1=censusCSVlist.get(j);
                 E censesAnalyzer2=censusCSVlist.get(j+1);
-                if(indianStateCodeComparator.compare(censesAnalyzer1,censesAnalyzer2)>0)
+                if(indianStatComparator.compare(censesAnalyzer1,censesAnalyzer2)>0)
                 {
                     censusCSVlist.set(j,censesAnalyzer2);
                     censusCSVlist.set(j+1,censesAnalyzer1);

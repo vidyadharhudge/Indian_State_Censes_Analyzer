@@ -2,7 +2,6 @@ package com.bl.censusanalyser.exception;
 
 public class CsvBuilderException extends RuntimeException
 {
-
     public enum ExceptionType
     {
         UNABLE_TO_PARSE;
