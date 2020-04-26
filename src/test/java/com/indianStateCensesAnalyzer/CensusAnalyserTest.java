@@ -43,7 +43,7 @@ public class CensusAnalyserTest {
     public void givenStateCensusData_WhenWithWrongType_ThenShouldThrowException() {
         try {
             censusAnalyser.readFile(WRONG_CSV_FILE_TYPE, IndianStateCensesAnalyzer.class);
-        } catch (CensusAnalyserException e) // Handling Exception "Enter Correct File And Type"
+        } catch (CensusAnalyserException e)
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, e.type);
         }
@@ -76,7 +76,6 @@ public class CensusAnalyserTest {
             int noOfRecords = censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCode.class);
             Assert.assertEquals(37, noOfRecords);
         } catch (CensusAnalyserException e) {
-
         }
     }
 
@@ -125,7 +124,7 @@ public class CensusAnalyserTest {
     public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState() {
         try {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
-            String sortedData = censusAnalyser.getStateWiseSortedData(IndianStateCensesAnalyzer.class);
+            String sortedData = censusAnalyser.getStateWiseSortedCode(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
             Assert.assertEquals("Andhra Pradesh", indianStateCensesAnalyzers[0].getState());
             Assert.assertEquals("West Bengal", indianStateCensesAnalyzers[28].getState());
