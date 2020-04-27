@@ -3,7 +3,9 @@ package com.bl.censusanalyser.model;
 import com.opencsv.bean.CsvBindByName;
 
 public class IndianStateCode
+
 {
+   // SrNo,StateName,TIN,StateCode
     @CsvBindByName(column="SrNo",required = true)
     private String srNo;
 

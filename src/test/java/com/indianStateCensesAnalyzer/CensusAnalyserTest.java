@@ -23,8 +23,12 @@ public class CensusAnalyserTest {
         try {
             int noOfRecords = censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             Assert.assertEquals(29, noOfRecords);
-        } catch (CensusAnalyserException e) {
+            int noOfRecordss=censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCensesAnalyzer.class);
+            Assert.assertEquals(36,noOfRecordss);
+        } catch (CensusAnalyserException e)
+        {
             e.printStackTrace();
+
         }
     }
 
@@ -43,8 +47,7 @@ public class CensusAnalyserTest {
     public void givenStateCensusData_WhenWithWrongType_ThenShouldThrowException() {
         try {
             censusAnalyser.readFile(WRONG_CSV_FILE_TYPE, IndianStateCensesAnalyzer.class);
-        } catch (CensusAnalyserException e)
-        {
+        } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, e.type);
         }
     }
@@ -118,24 +121,22 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
         }
     }
-
     /* T.C 3.1 :Indian Census Data In Sorted Form  */
     @Test
-    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState() {
-        try {
+    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndStat() {
+       try {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
-            String sortedData = censusAnalyser.getStateWiseSortedCode(IndianStateCensesAnalyzer.class);
+            String sortedData = censusAnalyser.getStateWiseSortedData(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
+            System.out.println(indianStateCensesAnalyzers);
             Assert.assertEquals("Andhra Pradesh", indianStateCensesAnalyzers[0].getState());
             Assert.assertEquals("West Bengal", indianStateCensesAnalyzers[28].getState());
         } catch (CensusAnalyserException e) {
-            e.printStackTrace();
         }
     }
-
     /* T.C 4.1 :Indian Code In Sorted Form  */
     @Test
-    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndState() {
+    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedCodeStartStateAndEndState() {
         try {
             censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCode.class);
             String sortedData = censusAnalyser.getStateWiseSortedCode(IndianStateCode.class);
@@ -143,7 +144,8 @@ public class CensusAnalyserTest {
             Assert.assertEquals("AD", indianStateCodes[0].getStateCode());
             Assert.assertEquals("WB", indianStateCodes[36].getStateCode());
         } catch (CensusAnalyserException e) {
-            e.printStackTrace();
         }
     }
+
+
 }
