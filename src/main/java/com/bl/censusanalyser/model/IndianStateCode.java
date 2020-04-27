@@ -2,68 +2,58 @@ package com.bl.censusanalyser.model;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IndianStateCode
+public class IndianStateCode {
+    // SrNo,StateName,TIN,StateCode
+    @CsvBindByName(column = "SrNo", required = true)
+    public int srNo;
 
-{
-   // SrNo,StateName,TIN,StateCode
-    @CsvBindByName(column="SrNo",required = true)
-    private String srNo;
+    @CsvBindByName(column = "StateName", required = true)
+    public String stateName;
 
-    @CsvBindByName (column ="StateName",required = true)
-    private String stateName;
+    @CsvBindByName(column = "TIN", required = true)
+    public int tin;
 
-    @CsvBindByName(column = "TIN",required = true)
-    private String tin;
+    @CsvBindByName(column = "StateCode", required = true)
+    public String stateCode;
 
-    @CsvBindByName (column = "StateCode",required = true)
-    private String stateCode;
-
-    public String getSrNo()
-    {
+    public int getSrNo() {
         return srNo;
     }
 
-    public void setSrNo(String srNo)
-    {
+    public void setSrNo(int srNo) {
         this.srNo = srNo;
     }
 
-    public String getStateName()
-    {
+    public String getStateName() {
         return stateName;
     }
 
-    public void setStateName(String stateName)
-    {
+    public void setStateName(String stateName) {
         this.stateName = stateName;
     }
 
-    public String getTin()
-    {
+    public int getTin() {
         return tin;
     }
 
-    public void setTin(String tin)
-    {
+    public void setTin(int tin) {
         this.tin = tin;
     }
 
-    public String getStateCode()
-    {
+    public String getStateCode() {
         return stateCode;
     }
 
-    public void setStateCode(String stateCode)
-    {
+    public void setStateCode(String stateCode) {
         this.stateCode = stateCode;
     }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "IndianStateCode{" +
-                "srNo='" + srNo + '\'' +
+                "srNo=" + srNo +
                 ", stateName='" + stateName + '\'' +
-                ", tin='" + tin + '\'' +
+                ", tin=" + tin +
                 ", stateCode='" + stateCode + '\'' +
                 '}';
     }
