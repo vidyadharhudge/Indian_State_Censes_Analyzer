@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import com.bl.censusanalyser.IndiaCensusDAO;
 
 import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest {
@@ -23,12 +24,11 @@ public class CensusAnalyserTest {
         try {
             int noOfRecords = censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             Assert.assertEquals(29, noOfRecords);
-            int noOfRecordss=censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCensesAnalyzer.class);
-            Assert.assertEquals(36,noOfRecordss);
+            int noOfFields=censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCensesAnalyzer.class);
+            Assert.assertEquals(37,noOfFields);
         } catch (CensusAnalyserException e)
         {
             e.printStackTrace();
-
         }
     }
 
@@ -71,7 +71,6 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
         }
     }
-
     /* Tc 2.1 :Given The State code Csv File, Check To Ensure The Number Of Record Matches */
     @Test
     public void givenFilePathOfStateCode_WhenNoOfRecordMatches_ThenReturnTrue() {
@@ -121,12 +120,13 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
         }
     }
-    /* T.C 3.1 :Indian Census Data In Sorted Form  */
+
+    /* T.C 3 :Indian Census Data In Sorted Form  */
     @Test
     public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndStat() {
        try {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
-            String sortedData = censusAnalyser.getStateWiseSortedData(IndianStateCensesAnalyzer.class);
+            String sortedData = censusAnalyser.SortedCode(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
             System.out.println(indianStateCensesAnalyzers);
             Assert.assertEquals("Andhra Pradesh", indianStateCensesAnalyzers[0].getState());
@@ -134,12 +134,12 @@ public class CensusAnalyserTest {
         } catch (CensusAnalyserException e) {
         }
     }
-    /* T.C 4.1 :Indian Code In Sorted Form  */
+    /* T.C 4 :Indian Code In Sorted Form  */
     @Test
-    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedCodeStartStateAndEndState() {
+    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedCodeStartCodeAndEndCode() {
         try {
             censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCode.class);
-            String sortedData = censusAnalyser.getStateWiseSortedCode(IndianStateCode.class);
+            String sortedData = censusAnalyser.SortedCode(IndianStateCode.class);
             IndianStateCode[] indianStateCodes = new Gson().fromJson(sortedData, IndianStateCode[].class);
             Assert.assertEquals("AD", indianStateCodes[0].getStateCode());
             Assert.assertEquals("WB", indianStateCodes[36].getStateCode());
@@ -147,5 +147,15 @@ public class CensusAnalyserTest {
         }
     }
 
-
+    /* T.C 5 :Indian Code In Sorted Form  */
+    @Test
+    public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedPopulation() {
+        try {
+            censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
+            String sortedData = censusAnalyser.SortedCode(IndiaCensusDAO.class);
+            IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
+            Assert.assertEquals(607688,indianStateCensesAnalyzers[0].getPopulation());
+        } catch (CensusAnalyserException e) {
+        }
+    }
 }
