@@ -1,5 +1,6 @@
 package com.indianStateCensesAnalyzer;
 import com.bl.censusanalyser.CensusAnalyser;
+import com.bl.censusanalyser.IndiaCensusDAO;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
 import com.bl.censusanalyser.model.IndianStateCode;
@@ -7,7 +8,6 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import com.bl.censusanalyser.IndiaCensusDAO;
 
 import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest {
@@ -24,10 +24,9 @@ public class CensusAnalyserTest {
         try {
             int noOfRecords = censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             Assert.assertEquals(29, noOfRecords);
-            int noOfFields=censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCensesAnalyzer.class);
-            Assert.assertEquals(37,noOfFields);
-        } catch (CensusAnalyserException e)
-        {
+            int noOfFields = censusAnalyser.readFile(STATE_CODE_CSV_FILE, IndianStateCensesAnalyzer.class);
+            Assert.assertEquals(37, noOfFields);
+        } catch (CensusAnalyserException e) {
             e.printStackTrace();
         }
     }
@@ -71,6 +70,7 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
         }
     }
+
     /* Tc 2.1 :Given The State code Csv File, Check To Ensure The Number Of Record Matches */
     @Test
     public void givenFilePathOfStateCode_WhenNoOfRecordMatches_ThenReturnTrue() {
@@ -124,7 +124,7 @@ public class CensusAnalyserTest {
     /* T.C 3 :Indian Census Data In Sorted Form  */
     @Test
     public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDataStartStateAndEndStat() {
-       try {
+        try {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             String sortedData = censusAnalyser.SortedCode(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
@@ -134,6 +134,7 @@ public class CensusAnalyserTest {
         } catch (CensusAnalyserException e) {
         }
     }
+
     /* T.C 4 :Indian Code In Sorted Form  */
     @Test
     public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedCodeStartCodeAndEndCode() {
@@ -154,8 +155,21 @@ public class CensusAnalyserTest {
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             String sortedData = censusAnalyser.SortedCode(IndiaCensusDAO.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
-            Assert.assertEquals(607688,indianStateCensesAnalyzers[0].getPopulation());
+            Assert.assertEquals(607688, indianStateCensesAnalyzers[0].getPopulation());
         } catch (CensusAnalyserException e) {
+        }
+    }
+
+    /* T.C 6 :Indian Census Data In Sorted Form  */
+    @Test
+    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDensity() {
+        try {
+            censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
+            String sortedData = censusAnalyser.SortedCode(IndianStateCensesAnalyzer.class);
+            IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
+            Assert.assertEquals(1102, indianStateCensesAnalyzers[0].getDensity());
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
         }
     }
 }
