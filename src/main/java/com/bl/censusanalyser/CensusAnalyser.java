@@ -1,7 +1,8 @@
 package com.bl.censusanalyser;
+
 import com.bl.censusanalyser.exception.CensusAnalyserException;
-import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
 import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
 public class CensusAnalyser<E>
 {
     List<E>censusCSVlist=null;
@@ -30,12 +30,15 @@ public class CensusAnalyser<E>
             ICSVBuilder icsvBuilder=CSVBuilderFactory.createCSVBuilder();
             Iterator<E>censusCsvIterator=icsvBuilder.getCSVfile(reader,csvClass);
             Iterable<E>iterable=()->censusCsvIterator;
-            while (censusCsvIterator.hasNext())
+           /* while (censusCsvIterator.hasNext())
             {
                 IndiaCensusDAO value=new IndiaCensusDAO((IndianStateCensesAnalyzer)censusCsvIterator.next());
                 this.censusMap.put(value.getState(),(E)value);
                 censusCSVlist=censusMap.values().stream().collect(Collectors.toList());
-            }
+            }*/
+            StreamSupport.stream(iterable.spliterator(),false)
+                    .forEach(IndianStateCensesAnalyzer->{censusMap.put(IndianStateCensesAnalyzer,(E)new IndiaCensusDAO<E>(csvClass));});
+            censusCSVlist=censusMap.values().stream().collect(Collectors.toList());
             int noOfRecords=censusMap.size();
             return noOfRecords;
         } catch (IOException e) {
