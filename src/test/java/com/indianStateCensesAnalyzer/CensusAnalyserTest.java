@@ -1,13 +1,16 @@
 package com.indianStateCensesAnalyzer;
+
 import com.bl.censusanalyser.CensusAnalyser;
 import com.bl.censusanalyser.IndiaCensusDAO;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
 import com.bl.censusanalyser.model.IndianStateCode;
+import com.bl.censusanalyser.model.USCensusData;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest
 {
@@ -125,7 +128,6 @@ public class CensusAnalyserTest
             censusAnalyser.readFile(INDIA_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
             String sortedData = censusAnalyser.SortedCode(IndianStateCensesAnalyzer.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
-            System.out.println(indianStateCensesAnalyzers);
             Assert.assertEquals("Bihar", indianStateCensesAnalyzers[0].getState());
         } catch (CensusAnalyserException e) {
         }
@@ -178,5 +180,15 @@ public class CensusAnalyserTest
         } catch (CensusAnalyserException e) {
             e.printStackTrace();
         }
+    }
+
+    /* Tc 8 :Given The US Census Csv File, Check To Ensure The Number Of Record Matches */
+    @Test
+    public void givenFilePathForUSCensus_WhenNoOfRecordMatches_ThenReturnTrue() {
+        try {
+            int noOfRecords = censusAnalyser.readFile(US_CENSUS_CSV_FILE_PATH, USCensusData.class);
+            Assert.assertEquals(51, noOfRecords);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace(); }
     }
 }

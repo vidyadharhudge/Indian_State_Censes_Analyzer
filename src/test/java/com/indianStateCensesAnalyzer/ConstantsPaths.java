@@ -10,4 +10,5 @@ public class ConstantsPaths
     public static final String WRONG_CSV_FILE_PATHS="C:/Users/Er. Sandesh Bora/shell-Problmes-Statment/Indian_State_Censes_Analyzer/StateCode.csv";
     public static final String WRONG_CSV_FILE_TYPES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCode.cs";
     public static final String WRONG_DELIMITER_FILES="C:/Users/Er. Sandesh Bora/shell-Problmes-Statments/Indian_State_Censes_Analyzer/StateCodeDataWithWrongDelimiter.csv";
+    public static final String US_CENSUS_CSV_FILE_PATH="C:\\Users\\Er. Sandesh Bora\\shell-Problmes-Statments\\Indian_State_Censes_Analyzer\\USCensusData.csv";
 }
