@@ -1,5 +1,4 @@
 package com.indianStateCensesAnalyzer;
-
 import com.bl.censusanalyser.CensusAnalyser;
 import com.bl.censusanalyser.IndiaCensusDAO;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
@@ -189,6 +188,20 @@ public class CensusAnalyserTest
             int noOfRecords = censusAnalyser.readFile(US_CENSUS_CSV_FILE_PATH, USCensusData.class);
             Assert.assertEquals(51, noOfRecords);
         } catch (CensusAnalyserException e) {
-            e.printStackTrace(); }
+            e.printStackTrace();
+        }
     }
-}
+
+        /* Tc 9 :Given The US Census Csv File, Check To Sorted Population State */
+        @Test
+        public void givenUsCensusData_WhenSorted_ThenShouldReturnSortedPopulationState() {
+            try {
+                censusAnalyser.readFile(US_CENSUS_CSV_FILE_PATH, IndianStateCensesAnalyzer.class);
+                String sortedData = censusAnalyser.SortedCode(IndiaCensusDAO.class);
+                IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
+                Assert.assertEquals("North Carolina", indianStateCensesAnalyzers[0].getState()); }
+            catch (CensusAnalyserException e) {
+                e.printStackTrace();
+            }
+        }
+    }

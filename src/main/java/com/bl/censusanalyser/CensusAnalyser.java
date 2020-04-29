@@ -19,6 +19,7 @@ public class CensusAnalyser<E>
 
     public CensusAnalyser() {
         censusMap=new HashMap<>(); }
+       // public enum Country{INDIA,US}
 
     public int readFile(String filePath, Class<E>csvClass) {
         try {
@@ -38,7 +39,7 @@ public class CensusAnalyser<E>
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Censes Data");
         }
     }
-    
+
     // no of entries in Csv File
     private <E> int getCount(Iterator<E> iterator) {
         Iterable<E> csviterable=()->iterator;
@@ -54,7 +55,7 @@ public class CensusAnalyser<E>
         String sortedCensusJson=new Gson().toJson(censusCSVlist);
         return sortedCensusJson; }
 
-    // Sorting Methode
+        // Sorting Methode
     public void sort(Comparator<E>indianStateCodeComparator,List<E>censusCSVlist) {
         for (int i = 0; i<censusCSVlist.size()-1; i++) {
             for (int j=0;j<censusCSVlist.size()-i-1; j++) {

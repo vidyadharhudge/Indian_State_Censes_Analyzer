@@ -1,6 +1,7 @@
 package com.bl.censusanalyser;
 import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
 import com.bl.censusanalyser.model.IndianStateCode;
+import com.bl.censusanalyser.model.USCensusData;
 
 public class IndiaCensusDAO<E> {
     private String state;
@@ -11,8 +12,11 @@ public class IndiaCensusDAO<E> {
     private int srNo;
     private String stateName;
     private int tin;
+    public String State;
+
     IndianStateCensesAnalyzer indianStateCensesAnalyzer;
     IndianStateCode indianStateCode;
+    USCensusData usCensusData;
 
     public IndiaCensusDAO(IndianStateCensesAnalyzer indianStateCensesAnalyzer) {
         state = indianStateCensesAnalyzer.getState();
@@ -26,9 +30,14 @@ public class IndiaCensusDAO<E> {
         stateName = indianStateCode.getStateName();
         tin = indianStateCode.getTin();
     }
+    public IndiaCensusDAO(USCensusData usCensusData)
+    {
+        State=usCensusData.getState();
+    }
 
     public IndiaCensusDAO(Class<E> csvClass) {
     }
+
         public String getState () {
             return state;
         }
