@@ -19,9 +19,7 @@ public class CensusAnalyser<E>
 
     public CensusAnalyser() {
         censusMap=new HashMap<>(); }
-       // public enum Country{INDIA,US}
-
-    public int readFile(String filePath, Class<E>csvClass) {
+        public int readFile(String filePath, Class<E>csvClass) {
         try {
             BufferedReader reader = Files.newBufferedReader(Paths.get(filePath));
             ICSVBuilder icsvBuilder=CSVBuilderFactory.createCSVBuilder();
@@ -32,12 +30,11 @@ public class CensusAnalyser<E>
                 this.censusMap.put(value.getState(),(E)value);
                 censusCSVlist=censusMap.values().stream().collect(Collectors.toList()); }
             int noOfRecords=censusMap.size();
-            return noOfRecords;
-        } catch (IOException e) {
+            return noOfRecords; }
+        catch (IOException e) {
             throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Enter Correct File And Type For State Censes Data"); }
         catch (RuntimeException  e) {
-            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Censes Data");
-        }
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER, "Check Delimiter And Header For State Censes Data"); }
     }
 
     // no of entries in Csv File
@@ -63,5 +60,8 @@ public class CensusAnalyser<E>
                 E censesAnalyzer2=censusCSVlist.get(j+1);
                 if(indianStateCodeComparator.compare(censesAnalyzer1,censesAnalyzer2)>0) {
                     censusCSVlist.set(j,censesAnalyzer2);
-                    censusCSVlist.set(j+1,censesAnalyzer1); } } } }
+                    censusCSVlist.set(j+1,censesAnalyzer1); }
+            }
+        }
+    }
 }

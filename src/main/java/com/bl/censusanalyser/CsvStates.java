@@ -33,14 +33,10 @@ public class CsvStates
             }
 
         }
-        catch ( IOException e)
-        {
-            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type For State Code");
-        }
-        catch ( RuntimeException e)
-        {
-            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,"Check Delimiter And Header For State Code");
-        }
+        catch ( IOException e) {
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND,"Enter Correct File And Type For State Code"); }
+        catch ( RuntimeException e) {
+            throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.WRONG_DELIMITER,"Check Delimiter And Header For State Code"); }
         return count;
     }
 
