@@ -4,7 +4,7 @@ import com.bl.censusanalyser.model.IndianStateCode;
 import com.bl.censusanalyser.model.USCensusData;
 
 public class IndiaCensusDAO<E> {
-    private String state;
+    private String State;
     private int population;
     private int area;
     private int density;
@@ -12,21 +12,20 @@ public class IndiaCensusDAO<E> {
     private int srNo;
     private String stateName;
     private int tin;
-    public String State;//
-    public String StateId;
-    public String Population;
-    public String HousingUnits;
-    public String TotalArea;
-    public String WaterArea;
-    public String LandArea;
-    public String PopulationDensity;
-    public String HousingDensity;
+    private String StateId;
+    private String Population;
+    private String HousingUnits;
+    private String TotalArea;
+    private String WaterArea;
+    private String LandArea;
+    private String PopulationDensity;
+    private String HousingDensity;
     IndianStateCensesAnalyzer indianStateCensesAnalyzer;
     IndianStateCode indianStateCode;
     USCensusData usCensusData;
 
     public IndiaCensusDAO(IndianStateCensesAnalyzer indianStateCensesAnalyzer) {
-        state = indianStateCensesAnalyzer.getState();
+        State = indianStateCensesAnalyzer.getState();
         population = indianStateCensesAnalyzer.getPopulation();
         area = indianStateCensesAnalyzer.getArea();
         density = indianStateCensesAnalyzer.getDensity(); }
@@ -51,11 +50,11 @@ public class IndiaCensusDAO<E> {
     public IndiaCensusDAO(Class<E> csvClass) {}
 
         public String getState () {
-            return state;
+            return State;
         }
 
         public void setState (String state){
-            this.state = indianStateCensesAnalyzer.getState();
+            this.State = indianStateCensesAnalyzer.getState();
         }
 
         public int getPopulation () {
@@ -144,4 +143,25 @@ public class IndiaCensusDAO<E> {
 
         public void setHousingDensity(String housingDensity) { HousingDensity = usCensusData.getHousingDensity(); }
 
+    @Override
+    public String toString() {
+        return srNo +
+                "," + State +
+                "," + population +
+                "," + area +
+                "," + tin +
+                "," + stateCode +
+                "," + density +
+                "," + stateName +
+                "," + TotalArea +
+                "," + StateId+
+                "," + HousingUnits +
+                "," + area +
+                "," + WaterArea +
+                "," + PopulationDensity +
+                "," + LandArea +
+                "," + HousingDensity ;
+
+
     }
+}

@@ -19,6 +19,10 @@ public class UsCensusCsv
     @CsvBindByName(column = "Population Density", required = true)
     public String PopulationDensity;
 
+    public UsCensusCsv(String state) {
+        State = state;
+    }
+
     @Override
     public String toString() {
         return "UsCensusCsv{" +

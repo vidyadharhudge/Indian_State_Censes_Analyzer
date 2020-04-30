@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 public class IndianStateCensesAnalyzer
 {
     @CsvBindByName(column="State")
-    public String state;
+    public String State;
 
     @CsvBindByName (column ="Population")
     public int population;
@@ -17,11 +17,11 @@ public class IndianStateCensesAnalyzer
 
 
     public String getState() {
-        return state;
+        return State;
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.State = state;
     }
 
     public int getPopulation() {
@@ -51,7 +51,7 @@ public class IndianStateCensesAnalyzer
     @Override
     public String toString() {
         return "IndianStateCensesAnalyzer{" +
-                "state='" + state + '\'' +
+                "State='" + State + '\'' +
                 ", population=" + population +
                 ", area=" + area +
                 ", density=" + density +
