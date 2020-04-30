@@ -53,7 +53,7 @@ public class CensusAnalyser<E>
         String sortedCensusJson=new Gson().toJson(censusCSVlist);
         return sortedCensusJson; }
 
-        // Sorting Methode
+    // Sorting Methode
     public void sort(int numbers,List<E>censusCSVlist) {
         for (int i = 0; i<censusCSVlist.size(); i++) {
             for (int j=0;j<censusCSVlist.size()-i-1; j++) {
