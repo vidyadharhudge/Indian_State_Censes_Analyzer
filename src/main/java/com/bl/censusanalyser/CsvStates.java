@@ -1,10 +1,8 @@
 package com.bl.censusanalyser;
-
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.bl.censusanalyser.model.IndianStateCode;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;

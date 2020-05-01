@@ -1,6 +1,6 @@
 package com.indianStateCensesAnalyzer;
 import com.bl.censusanalyser.CensusAnalyser;
-import com.bl.censusanalyser.IndiaCensusDAO;
+import com.bl.censusanalyser.dao.IndiaCensusDAO;
 import com.bl.censusanalyser.exception.CensusAnalyserException;
 import com.bl.censusanalyser.model.IndianStateCensesAnalyzer;
 import com.bl.censusanalyser.model.IndianStateCode;
@@ -9,12 +9,11 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static com.bl.censusanalyser.ConstantForFileLocation.*;
 
-import static com.indianStateCensesAnalyzer.ConstantsPaths.*;
 public class CensusAnalyserTest
 {
     CensusAnalyser censusAnalyser;
-
     @Before
     public void setup() {
         censusAnalyser = new CensusAnalyser();
@@ -206,6 +205,7 @@ public class CensusAnalyserTest
         catch (CensusAnalyserException e) {
         }
     }
+
     /* Tc 10.2 :Given The US Census Csv File, Check To Sorted Area State */
     @Test
     public void givenUsCensusData_WhenSorted_ThenShouldReturnSortedDensity() {
@@ -218,7 +218,7 @@ public class CensusAnalyserTest
         }
     }
 
-    /* Tc 11 :Given The US And India Census Csv File Compare Whose Population Is Most*/
+    /* Tc 11 :Given The US Census Csv File, for Sorting Population Density */
     @Test
     public void givenUsAndIndiaCensusData_WhenSorted_ThenShouldReturnSortedResult()
     {
@@ -227,11 +227,11 @@ public class CensusAnalyserTest
             String sortedData = censusAnalyser.SortedCode(3, IndiaCensusDAO.class);
             IndianStateCensesAnalyzer[] indianStateCensesAnalyzers = new Gson().fromJson(sortedData, IndianStateCensesAnalyzer[].class);
             Assert.assertEquals(1980602, indianStateCensesAnalyzers[28].getPopulation());
-
             censusAnalyser.readFile(US_CENSUS_CSV_FILE_PATH, USCensusData.class);
             String UssortedData = censusAnalyser.SortedCode(10, USCensusData.class);
             IndiaCensusDAO[] USStateCensesAnalyzers = new Gson().fromJson(UssortedData, IndiaCensusDAO[].class);
-            Assert.assertEquals(3805, USStateCensesAnalyzers[50].getPopulationDensity()); }
+            Assert.assertEquals(3805, USStateCensesAnalyzers[50].getPopulationDensity());
+        }
         catch (CensusAnalyserException e) {
             e.printStackTrace(); }
     }

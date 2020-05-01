@@ -32,76 +32,30 @@ public class USCensusData
     private String HousingDensity;
 
 
-    public String getStateId() {
-        return StateId;
-    }
-
-    public void setStateId(String stateId) {
-        StateId = stateId;
-    }
-
+    public String getStateId() { return StateId; }
     public String getState() {
         return State;
     }
-
-    public void setState(String state) {
-        State = state;
-    }
-
     public String getPopulation() {
         return Population;
     }
-
-    public void setPopulation(String population) {
-        Population = population;
-    }
-
     public String getHousingUnits() {
         return HousingUnits;
     }
-
-    public void setHousingUnits(String housingUnits) {
-        HousingUnits = housingUnits;
-    }
-
     public String getTotalArea() {
         return TotalArea;
     }
-
-    public void setTotalArea(String totalArea) {
-        TotalArea = totalArea;
-    }
-
     public String getWaterArea() {
         return WaterArea;
     }
-
-    public void setWaterArea(String waterArea) {
-        WaterArea = waterArea;
-    }
-
     public String getLandArea() {
         return LandArea;
     }
-
-    public void setLandArea(String landArea) {
-        LandArea = landArea;
-    }
-
     public String getPopulationDensity() {
         return PopulationDensity;
     }
-
-    public void setPopulationDensity(String populationDensity) {
-        PopulationDensity = populationDensity;
-    }
-
     public String getHousingDensity() {
         return HousingDensity;
-    }
-
-    public void setHousingDensity(String housingDensity) {
-        HousingDensity = housingDensity;
     }
 
     @Override
