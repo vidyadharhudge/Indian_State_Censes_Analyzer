@@ -29,7 +29,7 @@ public class USCensusData
     public String PopulationDensity;
 
     @CsvBindByName(column = "Housing Density", required = true)
-    private String HousingDensity;
+    public String HousingDensity;
 
 
     public String getStateId() { return StateId; }
